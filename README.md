@@ -25,10 +25,10 @@ By default, only two models and animations are included in the build. If you wan
 
 2. Load assets into the `Assets/Resources`-folder. 
 
-| Folder       | Context                              | Restrictions                             | Format                         |
-|--------------|--------------------------------------|------------------------------------------|--------------------------------|
-| `Characters` | Character models used for recordings | Must contain humanoid rig                | Animations used for recordings |
-| `Animations` | Animations used for recordings       | Must contain at least one animation clip | FBX                            |
+| Folder       | Context                              | Restrictions                             | Format |
+|--------------|--------------------------------------|------------------------------------------|-------|
+| `Characters` | Character models used for recordings | Must contain humanoid rig                | FBX   |
+| `Animations` | Animations used for recordings       | Must contain at least one animation clip | FBX   |
   
 3. Import all assets by using the editor utility (`Import` ➡ `Import All`)
 
