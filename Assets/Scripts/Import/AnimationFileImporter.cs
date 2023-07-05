@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class AnimationFileImporter : AssetFileImporter<AnimationChoice.Animation
         {
             name = animationClip.name,
             movable = false,
-            clip = animationClip
+            clips = new List<AnimationClip> { animationClip },
         };
     }
 }

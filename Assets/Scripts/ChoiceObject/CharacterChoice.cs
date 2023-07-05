@@ -38,7 +38,14 @@ public class CharacterChoice : MonoBehaviour
     public void ChooseCharacter(int characterIndex)
     {
         if (characterParent.childCount > 0) Destroy(characterParent.GetChild(0).gameObject);
-        var newCharacter = Instantiate(characterList.items[characterIndex].prefab, characterParent);
+        
+        ChooseCharacter(characterList.items[characterIndex]);
+    }
+    
+    public void ChooseCharacter(CharacterItem character)
+    {
+        if (characterParent.childCount > 0) Destroy(characterParent.GetChild(0).gameObject);
+        var newCharacter = Instantiate(character.prefab, characterParent);
         
         var characterAnimator = newCharacter.GetComponent<Animator>();
         if (characterAnimator.runtimeAnimatorController == null)
@@ -51,6 +58,7 @@ public class CharacterChoice : MonoBehaviour
         OnChangeCharacter?.Invoke(newCharacter);
     }
 
+    
     [Serializable]
     public class CharacterItem : ChoiceObject
     {

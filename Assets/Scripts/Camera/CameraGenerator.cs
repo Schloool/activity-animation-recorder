@@ -16,13 +16,15 @@ public abstract class CameraGenerator
         _cameras = cameras;
     }
 
-    public abstract void GenerateCameras(int amount, float radius, Vector3 center);
+    public abstract List<GameObject> GenerateCameras(int amount, float radius, Vector3 center);
 
-    protected void GenerateCamera(Vector3 position)
+    protected GameObject GenerateCamera(Vector3 position)
     {
         var camera = Object.Instantiate(_cameraPrefab, position, Quaternion.identity, _cameraParent);
         camera.transform.LookAt(_focusObjectTransform);
         _cameras.Add(camera);
         camera.enabled = false;
+
+        return camera.gameObject;
     }
 }

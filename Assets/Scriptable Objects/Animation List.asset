@@ -13,9 +13,21 @@ MonoBehaviour:
   m_Name: Animation List
   m_EditorClassIdentifier: 
   items:
-  - name: walk
-    clip: {fileID: -203655887218126122, guid: 184187f09d913794ab7a1e7de7283a37, type: 3}
-    movable: 0
   - name: wave
-    clip: {fileID: -203655887218126122, guid: 95705c0e23a64496e8a6102cb145fd6d, type: 3}
+    clips:
+    - {fileID: -203655887218126122, guid: 95705c0e23a64496e8a6102cb145fd6d, type: 3}
     movable: 0
+    bindActions: []
+    interactAction:
+      interactablePrefab: {fileID: 0}
+      moveIntoObject: 0
+      afterMainAnimationClip: {fileID: 0}
+  - name: walk
+    clips:
+    - {fileID: -203655887218126122, guid: 184187f09d913794ab7a1e7de7283a37, type: 3}
+    movable: 0
+    bindActions: []
+    interactAction:
+      interactablePrefab: {fileID: 0}
+      moveIntoObject: 0
+      afterMainAnimationClip: {fileID: 0}

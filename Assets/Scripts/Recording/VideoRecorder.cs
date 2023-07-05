@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using RenderHeads.Media.AVProMovieCapture;
-using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 /// <summary>
 /// Component used to record videos from multiple camera perspectives.
@@ -30,12 +28,6 @@ public class VideoRecorder : MonoBehaviour
     private List<Camera> _recordingCameras;
     private CameraGenerator _cameraGenerator;
 
-    private void Start()
-    {
-        _recordingCameras = new List<Camera>();
-        _cameraGenerator = new BallhausCameraGenerator(cameraPrefab, cameraParent, focusObjectTransform, _recordingCameras);
-    }
-
     /// <summary>
     /// Coroutine used to record all cameras.
     /// Only cameras outside the main camera will be considered.
@@ -44,11 +36,56 @@ public class VideoRecorder : MonoBehaviour
     {
         var mainCamera = Camera.main;
         Debug.Assert(mainCamera != null, "No main camera found.");
-
+        
         var characterChoice = FindObjectOfType<CharacterChoice>();
         Debug.Assert(characterChoice != null, "No character choice found");
         
-        _cameraGenerator.GenerateCameras(settings.cameraAmount, settings.radius, focusObjectTransform.position);
+        var animationChoice = FindObjectOfType<AnimationChoice>();
+        Debug.Assert(animationChoice != null, "No animation choice found");
+        
+        foreach (var animation in settings.animationList.items)
+        {
+            for (var i = 0; i < animation.clips.Count; i++)
+            {
+                yield return null;
+                Debug.Log($"Recording Animation {animation.name}");
+                yield return RecordAnimation(characterChoice, settings, 
+                    () => animationChoice.ChooseAnimationByItem(animation, i),
+                    $"{animation.name}_{i}");
+            }
+        }
+    }
+
+    private IEnumerator RecordAnimation(CharacterChoice characterChoice, RecordingSettings settings, Action SetCharacterAnimation,
+        string animationName)
+    {
+        for (var i = 0; i < settings.characterList.items.Count; i++)
+        {
+            characterChoice.ChooseCharacter(settings.characterList.items[i]);
+            yield return null;
+            SetCharacterAnimation();
+            yield return null;
+            yield return RecordCharacter(i, settings, animationName);
+        }
+        
+        // StartCoroutine(RigMetadataCoroutine(settings));
+        OnFinishRecording?.Invoke();
+    }
+
+    private IEnumerator RecordCharacter(int characterIndex, RecordingSettings settings, string animationName)
+    {
+        foreach (var radius in settings.radiusList)
+        {
+            yield return RecordRadius(radius, settings, characterIndex, animationName);
+        }
+    }
+
+    private IEnumerator RecordRadius(float radius, RecordingSettings settings, int characterIndex, string animationName)
+    {
+        _recordingCameras = new List<Camera>();
+        _cameraGenerator = new BallhausCameraGenerator(cameraPrefab, cameraParent, focusObjectTransform, _recordingCameras);
+        
+        var cameras = _cameraGenerator.GenerateCameras(settings.cameraAmount, radius, focusObjectTransform.position);
 
         if (!Directory.Exists(settings.recordingOutputFolder)) Directory.CreateDirectory(settings.recordingOutputFolder);
         if (!Directory.Exists(settings.metaOutputFolder)) Directory.CreateDirectory(settings.metaOutputFolder);
@@ -58,48 +95,41 @@ public class VideoRecorder : MonoBehaviour
             settings.maxBatchSize = 1;
         }
         
-        var characters = characterChoice.characterList.items;
-        for (var characterIndex = 0; characterIndex < characters.Count; characterIndex++)
+        var captureUnits = _recordingCameras
+            .Select(cam => cam.gameObject.AddComponent<CaptureFromCamera>())
+            .ToList();
+            
+        yield return null;
+            
+        while (captureUnits.Any())
         {
-            var captureUnits = _recordingCameras
-                .Select(cam => cam.gameObject.AddComponent<CaptureFromCamera>())
-                .ToList();
-            
-            characterChoice.ChooseCharacter(characterIndex);
-            yield return null;
-            
-            var recordingIndex = 0;
-            while (captureUnits.Any())
+            var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
+            int cameraIndex = 0;
+                
+            foreach (var capture in currentBatch)
             {
-                var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
-                
-                foreach (var capture in currentBatch)
-                {
-                    recordingIndex++;
-                    var fileName = $"rec_{characterIndex}-{recordingIndex}";
-                    CaptureCamera(settings, capture, fileName);
-                }
-
-                yield return new WaitForSeconds(settings.clipLength); 
-                
-                captureUnits = captureUnits.Skip(settings.maxBatchSize).ToList();
+                var fileName = $"{animationName}-c{characterIndex}-r{radius}-{cameraIndex++}";
+                CaptureCamera(settings, capture, fileName);
             }
-            yield return new WaitForSeconds(1f);
-            
-            captureUnits.ForEach(Destroy);
-            yield return null;
+
+            yield return new WaitForSeconds(settings.clipLength); 
+                
+            captureUnits = captureUnits.Skip(settings.maxBatchSize).ToList();
         }
+        yield return new WaitForSeconds(1f);
         
-        StartCoroutine(RigMetadataCoroutine(settings));
-        OnFinishRecording?.Invoke();
+        captureUnits.ForEach(Destroy);
+        cameras.ForEach(Destroy);
+        yield return null;
     }
 
     private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string fileName)
     {
         capture.IsRealTime = false;
         capture.FrameRate = settings.frameRate;
-        capture.SelectRecordingResolution(1920, 1080);
+        capture.SelectRecordingResolution(640, 360);
         capture.QueueStartCapture();
+        capture.LogCaptureStartStop = false;
         capture.AppendFilenameTimestamp = false;
         capture.FilenamePrefix = fileName;
         capture.OutputFolderPath = settings.recordingOutputFolder;

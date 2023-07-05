@@ -49,7 +49,7 @@ public class CommandLineApplicationAdapter : MonoBehaviour
     public void ParseRadius(string radiusString)
     {
         if (!float.TryParse(radiusString, out var radius)) return;
-        settings.radius = radius;
+        settings.radiusList = new List<float> { radius };
     }
 
     public void SetRecordingOutputPath(string outputFolder)

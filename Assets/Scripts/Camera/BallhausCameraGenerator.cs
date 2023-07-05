@@ -8,8 +8,9 @@ public class BallhausCameraGenerator : CameraGenerator
     public BallhausCameraGenerator(Camera cameraPrefab, Transform cameraParent, Transform focusObjectTransform, List<Camera> cameras) 
         : base(cameraPrefab, cameraParent, focusObjectTransform, cameras) { }
 
-    public override void GenerateCameras(int amount, float radius, Vector3 center)
+    public override List<GameObject> GenerateCameras(int amount, float radius, Vector3 center)
     {
+        var cameras = new List<GameObject>();
         for (var latitude = 0; latitude < LatitudeIterations; latitude ++)
         {
             var lat = Mathf.Lerp(0f, 0.9f * Mathf.PI / 2f, latitude / (float) LatitudeIterations);
@@ -26,8 +27,10 @@ public class BallhausCameraGenerator : CameraGenerator
                 var z = multiplier * equatorZ * radius;
                 var y = Mathf.Sin(lat) * radius;
             
-                GenerateCamera(new Vector3(x, y, z));
+                cameras.Add(GenerateCamera(new Vector3(x, y, z)));
             }
         }
+
+        return cameras;
     }
 }

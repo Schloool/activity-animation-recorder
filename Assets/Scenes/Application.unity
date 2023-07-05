@@ -361,7 +361,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1675499738}
         m_TargetAssemblyTypeName: RecordingUI, Assembly-CSharp
-        m_MethodName: RecordAllCameras
+        m_MethodName: RecordWithPreSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -923,9 +923,11 @@ MonoBehaviour:
     clipLength: 2
     cameraAmount: 5
     maxBatchSize: 7
-    radius: 10
     recordingOutputFolder: Recordings
     metaOutputFolder: Metadata
+    radiusList: []
+    characterList: {fileID: 0}
+    animationList: {fileID: 0}
 --- !u!1 &173589445
 GameObject:
   m_ObjectHideFlags: 0
@@ -5640,6 +5642,17 @@ MonoBehaviour:
   recordingLengthText: {fileID: 996086378}
   fpsText: {fileID: 1174511443}
   uiParent: {fileID: 142782465}
+  preSettings:
+    frameRate: 30
+    clipLength: 2
+    cameraAmount: 1
+    maxBatchSize: 10
+    recordingOutputFolder: Recordings
+    metaOutputFolder: Recordings/Meta
+    radiusList:
+    - 6
+    characterList: {fileID: 11400000, guid: 27f41c0b93fc6f647a6799accec1ebb0, type: 2}
+    animationList: {fileID: 11400000, guid: fe9424b768a1e5643baa6a363c0c1a61, type: 2}
 --- !u!1 &1688064847
 GameObject:
   m_ObjectHideFlags: 0

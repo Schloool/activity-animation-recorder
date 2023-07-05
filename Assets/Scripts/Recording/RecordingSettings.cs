@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [Serializable]
 public struct RecordingSettings
@@ -7,7 +8,10 @@ public struct RecordingSettings
     public float clipLength;
     public int cameraAmount;
     public int maxBatchSize;
-    public float radius;
     public string recordingOutputFolder;
     public string metaOutputFolder;
+    
+    public List<float> radiusList;
+    public CharacterList characterList;
+    public AnimationList animationList;
 }

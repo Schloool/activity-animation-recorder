@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -29,6 +30,9 @@ public class RecordingUI : MonoBehaviour
     [SerializeField] [Tooltip("The UI which will be deactivated when starting the recording")]
     private GameObject uiParent;
 
+    [SerializeField] 
+    private RecordingSettings preSettings; 
+
     private VideoRecorder _recorder;
 
     private void Start()
@@ -56,9 +60,19 @@ public class RecordingUI : MonoBehaviour
             cameraAmount = cameraAmount,
             recordingOutputFolder = "Recordings",
             metaOutputFolder = "Recordings/Meta",
-            radius = 6f,
-        };
+            radiusList = new List<float> { 6f }
+        }; 
         
+        RecordWithSettings(settings);
+    }
+
+    public void RecordWithPreSettings()
+    {
+        RecordWithSettings(preSettings);
+    }
+
+    public void RecordWithSettings(RecordingSettings settings)
+    {
         StartCoroutine(_recorder.RecordingRoutine(settings));
         uiParent.SetActive(false);
     }
