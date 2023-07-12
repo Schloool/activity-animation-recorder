@@ -345,7 +345,7 @@ namespace RenderHeads.Media.AVProMovieCapture
 
 			Close();
 
-			Debug.Log("[AVProMovieCapture] File processing complete");
+			// Debug.Log("[AVProMovieCapture] File processing complete");
 
 			return true;
 		}

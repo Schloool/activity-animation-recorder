@@ -45,19 +45,31 @@ public class VideoRecorder : MonoBehaviour
         
         foreach (var animation in settings.animationList.items)
         {
+            var startTime = Time.realtimeSinceStartup;
+            Debug.Log($"Recording animation {animation.name}");
+            Directory.CreateDirectory($"{settings.recordingOutputFolder}/{animation.name}/{settings.metaOutputFolder}");
+            
             for (var i = 0; i < animation.clips.Count; i++)
             {
                 yield return null;
-                Debug.Log($"Recording Animation {animation.name}");
                 yield return RecordAnimation(characterChoice, settings, 
                     () => animationChoice.ChooseAnimationByItem(animation, i),
-                    $"{animation.name}_{i}");
+                    animation.name, i);
             }
+
+            var neededTime = Time.realtimeSinceStartup - startTime;
+            var clipAmount = animation.clips.Count * settings.cameraAmount * settings.radiusList.Count 
+                             * settings.characterList.items.Count;
+            Debug.Log($"Time: {neededTime:0.00}s for {clipAmount} clips");
         }
+
+        yield return null;
+        
+        OnFinishRecording?.Invoke();
     }
 
-    private IEnumerator RecordAnimation(CharacterChoice characterChoice, RecordingSettings settings, Action SetCharacterAnimation,
-        string animationName)
+    private IEnumerator RecordAnimation(CharacterChoice characterChoice, RecordingSettings settings, 
+        Action SetCharacterAnimation, string animationName, int animationIndex)
     {
         for (var i = 0; i < settings.characterList.items.Count; i++)
         {
@@ -65,22 +77,26 @@ public class VideoRecorder : MonoBehaviour
             yield return null;
             SetCharacterAnimation();
             yield return null;
-            yield return RecordCharacter(i, settings, animationName);
+            yield return RecordCharacter(i, settings, animationName, animationIndex);
+
+            if (i == 0)
+            {
+                yield return RigMetadataCoroutine(settings, animationName);
+            }
         }
-        
-        // StartCoroutine(RigMetadataCoroutine(settings));
-        OnFinishRecording?.Invoke();
     }
 
-    private IEnumerator RecordCharacter(int characterIndex, RecordingSettings settings, string animationName)
+    private IEnumerator RecordCharacter(int characterIndex, RecordingSettings settings, string animationName,
+        int animationIndex)
     {
         foreach (var radius in settings.radiusList)
         {
-            yield return RecordRadius(radius, settings, characterIndex, animationName);
+            yield return RecordRadius(radius, settings, characterIndex, animationName, animationIndex);
         }
     }
 
-    private IEnumerator RecordRadius(float radius, RecordingSettings settings, int characterIndex, string animationName)
+    private IEnumerator RecordRadius(float radius, RecordingSettings settings, int characterIndex, string animationName,
+        int animationIndex)
     {
         _recordingCameras = new List<Camera>();
         _cameraGenerator = new BallhausCameraGenerator(cameraPrefab, cameraParent, focusObjectTransform, _recordingCameras);
@@ -88,7 +104,6 @@ public class VideoRecorder : MonoBehaviour
         var cameras = _cameraGenerator.GenerateCameras(settings.cameraAmount, radius, focusObjectTransform.position);
 
         if (!Directory.Exists(settings.recordingOutputFolder)) Directory.CreateDirectory(settings.recordingOutputFolder);
-        if (!Directory.Exists(settings.metaOutputFolder)) Directory.CreateDirectory(settings.metaOutputFolder);
 
         if (settings.maxBatchSize <= 0)
         {
@@ -101,43 +116,46 @@ public class VideoRecorder : MonoBehaviour
             
         yield return null;
             
+        int cameraIndex = 0;
         while (captureUnits.Any())
         {
             var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
-            int cameraIndex = 0;
                 
             foreach (var capture in currentBatch)
             {
-                var fileName = $"{animationName}-c{characterIndex}-r{radius}-{cameraIndex++}";
-                CaptureCamera(settings, capture, fileName);
+                var folder = $"{settings.recordingOutputFolder}/{animationName}";
+                var fileName = $"{animationName}_{animationIndex}-c{characterIndex}-r{radius}-{cameraIndex++}";
+                CaptureCamera(settings, capture, folder, fileName);
             }
-
-            yield return new WaitForSeconds(settings.clipLength); 
-                
+            
+            yield return new WaitForSeconds(settings.clipLength);     
             captureUnits = captureUnits.Skip(settings.maxBatchSize).ToList();
         }
-        yield return new WaitForSeconds(1f);
+
+        yield return null;
         
         captureUnits.ForEach(Destroy);
         cameras.ForEach(Destroy);
         yield return null;
     }
 
-    private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string fileName)
+    private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string folder, string fileName)
     {
         capture.IsRealTime = false;
         capture.FrameRate = settings.frameRate;
         capture.SelectRecordingResolution(640, 360);
+        capture.TimelapseScale = 4000;
         capture.QueueStartCapture();
         capture.LogCaptureStartStop = false;
         capture.AppendFilenameTimestamp = false;
+        capture.OutputFolderPath = folder;
         capture.FilenamePrefix = fileName;
-        capture.OutputFolderPath = settings.recordingOutputFolder;
 
         capture.StartCapture();
 
         StartCoroutine(RecordingStopRoutine(capture, settings.clipLength));
-        new CameraMetadataWriter($"{settings.metaOutputFolder}/{fileName}.xml", capture.gameObject).Write();
+
+        new CameraMetadataWriter($"{folder}/{settings.metaOutputFolder}/{fileName}.xml", capture.gameObject).Write();
     }
 
     private IEnumerator RecordingStopRoutine(CaptureBase capture, float delay)
@@ -146,18 +164,19 @@ public class VideoRecorder : MonoBehaviour
         capture.StopCapture();
     }
 
-    private IEnumerator RigMetadataCoroutine(RecordingSettings settings)
+    private IEnumerator RigMetadataCoroutine(RecordingSettings settings, string animationName)
     {
         var rigParent = focusObjectTransform.GetComponentsInChildren<Transform>()
             .FirstOrDefault(t => t.gameObject.name == "root");
         if (rigParent == null) yield break;
 
-        Directory.CreateDirectory($"{settings.metaOutputFolder}/rig");
+        var rigFolder = $"{settings.recordingOutputFolder}/{animationName}/{settings.metaOutputFolder}/rig";
+        Directory.CreateDirectory(rigFolder);
         
         int currentFrame = 0;
         while (currentFrame < settings.clipLength * settings.frameRate)
         {
-            new RigMetadataWriter($"{settings.metaOutputFolder}/rig/frame_{currentFrame + 1}.xml", rigParent).Write();
+            new RigMetadataWriter($"{rigFolder}/frame_{currentFrame + 1}.xml", rigParent).Write();
             currentFrame++;
             yield return null;
         }

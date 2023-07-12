@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -43,6 +44,7 @@ public class AnimationChoice : MonoBehaviour
         var character = characterParent.GetChild(0);
         SetAnimationClip(character.gameObject, animationItem.clips[clipIndex]);
         
+        if (_interactionObject != null) Destroy(_interactionObject);
         _boundObjects.ForEach(Destroy);
         _boundObjects.Clear();
         animationItem.bindActions.ForEach(ApplyBindAction);
@@ -53,10 +55,10 @@ public class AnimationChoice : MonoBehaviour
             _interactionCoroutine = null;
         }
 
-        // if (animationItem.interactAction.interactablePrefab != null)
-        // {
-        // _interactionCoroutine = StartCoroutine(InteractionRoutine(animationItem, character.gameObject));
-        // }
+        if (animationItem.interactAction.interactablePrefab != null)
+        {
+            _interactionCoroutine = StartCoroutine(InteractionRoutine(animationItem, character.gameObject, clipIndex));
+        }
         
         OnChangeItem?.Invoke(animationItem);
     }
@@ -73,35 +75,35 @@ public class AnimationChoice : MonoBehaviour
         animator.runtimeAnimatorController = animatorOverrideController;
     }
 
-    // TODO: Apply new logic containing multiple clips
-    // private IEnumerator InteractionRoutine(AnimationItem item, GameObject character)
-    // {
-    //     var animator = character.GetComponent<Animator>();
-    //     
-    //     while (true)
-    //     {
-    //         _interactionObject = Instantiate(item.interactAction.interactablePrefab);
-    //         if (item.interactAction.moveIntoObject)
-    //         {
-    //             LeanTween.move(character, _interactionObject.transform.position + Vector3.down * 1.3f, item.clip.length);
-    //         }
-    //         
-    //         yield return new WaitForSeconds(item.clip.length);
-    //         animator.speed = 0f;
-    //
-    //         if (item.interactAction.afterMainAnimationClip != null)
-    //         {
-    //             SetAnimationClip(_interactionObject, item.interactAction.afterMainAnimationClip);
-    //             yield return new WaitForSeconds(item.interactAction.afterMainAnimationClip.length);
-    //         }
-    //
-    //         Destroy(_interactionObject);
-    //         
-    //         animator.speed = 1f;
-    //         character.transform.position = Vector3.zero;
-    //         character.transform.rotation = Quaternion.identity;
-    //     }
-    // }
+    private IEnumerator InteractionRoutine(AnimationItem item, GameObject character, int clipIndex)
+    {
+        var animator = character.GetComponent<Animator>();
+        
+        while (true)
+        {
+            _interactionObject = Instantiate(item.interactAction.interactablePrefab);
+            if (item.interactAction.moveIntoObject)
+            {
+                LeanTween.move(character, _interactionObject.transform.position + Vector3.down * 1.3f, 
+                    item.clips[clipIndex].length);
+            }
+            
+            yield return new WaitForSeconds(item.clips[clipIndex].length);
+            animator.speed = 0f;
+    
+            if (item.interactAction.afterMainAnimationClip != null)
+            {
+                SetAnimationClip(_interactionObject, item.interactAction.afterMainAnimationClip);
+                yield return new WaitForSeconds(item.interactAction.afterMainAnimationClip.length);
+            }
+    
+            Destroy(_interactionObject);
+            
+            animator.speed = 1f;
+            character.transform.position = Vector3.zero;
+            character.transform.rotation = Quaternion.identity;
+        }
+    }
 
     private void ApplyBindAction(AnimationItem.AnimationBindAction action)
     {

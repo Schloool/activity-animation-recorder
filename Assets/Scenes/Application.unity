@@ -5645,10 +5645,10 @@ MonoBehaviour:
   preSettings:
     frameRate: 30
     clipLength: 2
-    cameraAmount: 1
-    maxBatchSize: 10
+    cameraAmount: 100
+    maxBatchSize: 2
     recordingOutputFolder: Recordings
-    metaOutputFolder: Recordings/Meta
+    metaOutputFolder: meta
     radiusList:
     - 6
     characterList: {fileID: 11400000, guid: 27f41c0b93fc6f647a6799accec1ebb0, type: 2}
