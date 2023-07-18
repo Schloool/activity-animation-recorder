@@ -49,7 +49,7 @@ public class AnimationMovementSettings : MonoBehaviour
         _currentAnimator = newCharacter.GetComponent<Animator>();
     }
     
-    private void HandleAnimationChange(AnimationChoice.AnimationItem animation)
+    private void HandleAnimationChange(AnimationChoice.AnimationClipItem animation)
     {
         movementAdjustmentParent.SetActive(animation.movable);
     }

@@ -13,21 +13,13 @@ MonoBehaviour:
   m_Name: Animation List
   m_EditorClassIdentifier: 
   items:
-  - name: sit
+  - name: person_picks_up_object
     clips:
-    - {fileID: -203655887218126122, guid: 76998656e7ec34d48930a397b25e2542, type: 3}
-    movable: 0
-    bindActions: []
-    interactAction:
-      interactablePrefab: {fileID: 7518706132589228550, guid: 1111c9f6c8d61f74b945643d33f155da, type: 3}
-      moveIntoObject: 1
-      afterMainAnimationClip: {fileID: 7400000, guid: e44f2d9570f49594c9ba45cf3b0db724, type: 2}
-  - name: walk
-    clips:
-    - {fileID: -203655887218126122, guid: 184187f09d913794ab7a1e7de7283a37, type: 3}
-    movable: 0
-    bindActions: []
-    interactAction:
-      interactablePrefab: {fileID: 0}
-      moveIntoObject: 0
-      afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 7c0294d8489ec4843b9b320401356478, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        moveIntoObject: 0
+        afterMainAnimationClip: {fileID: 0}

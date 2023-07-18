@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BallhausCameraGenerator : CameraGenerator
 {
-    private const int LatitudeIterations = 10;
+    private const int LatitudeIterations = 5;
     
     public BallhausCameraGenerator(Camera cameraPrefab, Transform cameraParent, Transform focusObjectTransform, List<Camera> cameras) 
         : base(cameraPrefab, cameraParent, focusObjectTransform, cameras) { }

@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78f3f84bae54d9189a0bc05b6beffcf, type: 3}
+  m_Name: Person Interacts with Laptop Animation List
+  m_EditorClassIdentifier: 
+  items:
+  - name: person_interacts_with_laptop
+    clips:
+    - clip: {fileID: -4671056281497532287, guid: 10957529d9e28a249b5a1c43b595dbf8, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 640ea6ca43af46745b9aea6d8fb03de3, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: d9cdd2af1c12e1f448d89b3f8ab1e598, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 3bcc054b43efd024b9f19741e70db995, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 218a9641944ef82498a048df4bfc2c48, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 7148046856994744a97f98ffcfacab70, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}

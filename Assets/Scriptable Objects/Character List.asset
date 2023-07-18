@@ -15,5 +15,3 @@ MonoBehaviour:
   items:
   - name: caucasian_female
     prefab: {fileID: 919132149155446097, guid: 92bc94b87083af440bb1b3ee2ca99e5a, type: 3}
-  - name: caucasian_male
-    prefab: {fileID: 919132149155446097, guid: a9a0be1efdb8f2044b7433f2d49dcab3, type: 3}

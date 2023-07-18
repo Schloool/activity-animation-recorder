@@ -25,8 +25,12 @@ public class AnimationFileImporter : AssetFileImporter<AnimationChoice.Animation
         return new AnimationChoice.AnimationItem
         {
             name = animationClip.name,
-            movable = false,
-            clips = new List<AnimationClip> { animationClip },
+            clips = new List<AnimationChoice.AnimationClipItem> { new AnimationChoice.AnimationClipItem()
+                {
+                    clip = animationClip,
+                    movable = false,
+                    loopable = false,
+                }},
         };
     }
 }

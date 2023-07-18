@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78f3f84bae54d9189a0bc05b6beffcf, type: 3}
+  m_Name: Read Animation List
+  m_EditorClassIdentifier: 
+  items:
+  - name: person_reads_document
+    clips:
+    - clip: {fileID: -4671056281497532287, guid: d80e23fcd0859de4fa06cca171b710a7, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 31d5ae8432e45574995bd8390e74167f, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 1028615375780340856, guid: 5f257d7b6de0ee940ab1ea240d56253e, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 1fb65b58a9dfb4f498f49ec978f6dde8, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 42ebf984d63fb964e994c50e33ff5e44, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 04104894ba11da94ebe22cda042a9f2a, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 0e8b45434053ace4e9a50fc3e4e9e7d2, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: b11c73748d94c904dad4b2720b07724a, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 5e421feb616c1a448b0454338efcb97a, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions:
+      - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
+        boneName: finger3-3.R
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}

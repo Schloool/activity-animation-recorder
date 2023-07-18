@@ -8,6 +8,7 @@ public struct RecordingSettings
     public float clipLength;
     public int cameraAmount;
     public int maxBatchSize;
+    public bool saveRigData;
     public string recordingOutputFolder;
     public string metaOutputFolder;
     

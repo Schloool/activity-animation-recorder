@@ -923,6 +923,7 @@ MonoBehaviour:
     clipLength: 2
     cameraAmount: 5
     maxBatchSize: 7
+    saveRigData: 0
     recordingOutputFolder: Recordings
     metaOutputFolder: Metadata
     radiusList: []
@@ -5645,14 +5646,15 @@ MonoBehaviour:
   preSettings:
     frameRate: 30
     clipLength: 2
-    cameraAmount: 100
+    cameraAmount: 5
     maxBatchSize: 2
+    saveRigData: 0
     recordingOutputFolder: Recordings
     metaOutputFolder: meta
     radiusList:
     - 6
     characterList: {fileID: 11400000, guid: 27f41c0b93fc6f647a6799accec1ebb0, type: 2}
-    animationList: {fileID: 11400000, guid: fe9424b768a1e5643baa6a363c0c1a61, type: 2}
+    animationList: {fileID: 11400000, guid: 651e22bc35e794844be0830cd97495ef, type: 2}
 --- !u!1 &1688064847
 GameObject:
   m_ObjectHideFlags: 0

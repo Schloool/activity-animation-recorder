@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 /// </summary>
 public class AnimationChoice : MonoBehaviour
 {
-    public event Action<AnimationItem> OnChangeItem;
+    public event Action<AnimationClipItem> OnChangeItem;
     
     [field:SerializeField]
     public AnimationList AnimationList { get; set; }
@@ -36,18 +36,21 @@ public class AnimationChoice : MonoBehaviour
     public void ChooseAnimation(int animationIndex)
     {
         var animationItem = AnimationList.items[animationIndex];
-        ChooseAnimationByItem(animationItem, 0);
+        ChooseAnimationByItem(animationItem.clips[0]);
     }
 
-    public void ChooseAnimationByItem(AnimationItem animationItem, int clipIndex)
+    public void ChooseAnimationByItem(AnimationClipItem item)
     {
         var character = characterParent.GetChild(0);
-        SetAnimationClip(character.gameObject, animationItem.clips[clipIndex]);
+        SetAnimationClip(character.gameObject, item.clip);
         
         if (_interactionObject != null) Destroy(_interactionObject);
         _boundObjects.ForEach(Destroy);
         _boundObjects.Clear();
-        animationItem.bindActions.ForEach(ApplyBindAction);
+        item.bindActions.ForEach((a) =>
+        {
+            ApplyBindAction(a, item.clip.length);
+        });
 
         if (_interactionCoroutine != null)
         {
@@ -55,12 +58,12 @@ public class AnimationChoice : MonoBehaviour
             _interactionCoroutine = null;
         }
 
-        if (animationItem.interactAction.interactablePrefab != null)
+        if (item.interactAction.interactablePrefab != null)
         {
-            _interactionCoroutine = StartCoroutine(InteractionRoutine(animationItem, character.gameObject, clipIndex));
+            _interactionCoroutine = StartCoroutine(InteractionRoutine(item, character.gameObject));
         }
         
-        OnChangeItem?.Invoke(animationItem);
+        OnChangeItem?.Invoke(item);
     }
 
     private void SetAnimationClip(GameObject target, AnimationClip clip)
@@ -75,20 +78,27 @@ public class AnimationChoice : MonoBehaviour
         animator.runtimeAnimatorController = animatorOverrideController;
     }
 
-    private IEnumerator InteractionRoutine(AnimationItem item, GameObject character, int clipIndex)
+    private IEnumerator InteractionRoutine(AnimationClipItem item, GameObject character)
     {
         var animator = character.GetComponent<Animator>();
+        var action = item.interactAction;
         
         while (true)
         {
-            _interactionObject = Instantiate(item.interactAction.interactablePrefab);
+            _interactionObject = Instantiate(action.interactablePrefab, action.spawnPosition, 
+                action.interactablePrefab.transform.rotation);
             if (item.interactAction.moveIntoObject)
             {
                 LeanTween.move(character, _interactionObject.transform.position + Vector3.down * 1.3f, 
-                    item.clips[clipIndex].length);
+                    item.clip.length);
             }
             
-            yield return new WaitForSeconds(item.clips[clipIndex].length);
+            if (item.interactAction.turnToObject)
+            {
+                character.transform.LookAt(_interactionObject.transform);
+            }
+            
+            yield return new WaitForSeconds(item.clip.length);
             animator.speed = 0f;
     
             if (item.interactAction.afterMainAnimationClip != null)
@@ -105,11 +115,19 @@ public class AnimationChoice : MonoBehaviour
         }
     }
 
-    private void ApplyBindAction(AnimationItem.AnimationBindAction action)
+    private void ApplyBindAction(AnimationClipItem.AnimationBindAction action, float clipLength)
     {
         var character = characterParent.GetChild(0);
         var objectParent = RecursiveFindChild(character, action.boneName);
-        _boundObjects.Add(Instantiate(action.prefab, objectParent));
+        var bindItem = Instantiate(action.prefab);
+
+        StartCoroutine(BindRoutine(bindItem, objectParent, clipLength * action.timePercentage));
+    }
+
+    private IEnumerator BindRoutine(GameObject bindItem, Transform objectParent, float time)
+    {
+        yield return new WaitForSeconds(time);
+        bindItem.transform.parent = objectParent;
     }
 
     private static Transform RecursiveFindChild(Transform parent, string childName)
@@ -127,15 +145,24 @@ public class AnimationChoice : MonoBehaviour
     [Serializable]
     public class AnimationItem : ChoiceObject
     {
-        public List<AnimationClip> clips;
+        public List<AnimationClipItem> clips;
+    }
+
+    [Serializable]
+    public struct AnimationClipItem
+    {
+        public AnimationClip clip;
+        public bool loopable;
         public bool movable;
         public List<AnimationBindAction> bindActions;
         public AnimationInteractAction interactAction;
+        
 
         [Serializable]
         public class AnimationBindAction
         {
             public GameObject prefab;
+            [Range(0f, 1f)] public float timePercentage;
             public string boneName;
         }
         
@@ -143,8 +170,10 @@ public class AnimationChoice : MonoBehaviour
         public class AnimationInteractAction
         {
             public GameObject interactablePrefab;
+            public Vector3 spawnPosition;
             public bool moveIntoObject;
-            [FormerlySerializedAs("afterMainAnimation")] public AnimationClip afterMainAnimationClip;
+            public bool turnToObject;
+            public AnimationClip afterMainAnimationClip;
         }
     }
 }

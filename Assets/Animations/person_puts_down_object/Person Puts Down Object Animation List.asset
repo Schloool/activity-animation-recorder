@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78f3f84bae54d9189a0bc05b6beffcf, type: 3}
+  m_Name: Person Puts Down Object Animation List
+  m_EditorClassIdentifier: 
+  items:
+  - name: person_puts_down_object
+    clips:
+    - clip: {fileID: -4671056281497532287, guid: 3c27f4dd337c2e94a9391a2ee7e83769, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 33b6c6b1c20bf7544acded4dd97a77fb, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: ee6aeac394dae45498bba3b4efa0ca22, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: d5da91a0bc9402a45b267df5ad20aab8, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: acea4d3c526a19d4fa54b93e467fdf05, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 43a18bd8bf2458746b2f47a6bd05f344, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: f7b3927643ffd824a9eee9f912921a54, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 0}
+        spawnPosition: {x: 0, y: 0, z: 0}
+        moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}

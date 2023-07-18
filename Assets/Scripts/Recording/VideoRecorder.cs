@@ -53,8 +53,8 @@ public class VideoRecorder : MonoBehaviour
             {
                 yield return null;
                 yield return RecordAnimation(characterChoice, settings, 
-                    () => animationChoice.ChooseAnimationByItem(animation, i),
-                    animation.name, i);
+                    () => animationChoice.ChooseAnimationByItem(animation.clips[i]),
+                    animation.name, i, animation.clips[i]);
             }
 
             var neededTime = Time.realtimeSinceStartup - startTime;
@@ -69,7 +69,7 @@ public class VideoRecorder : MonoBehaviour
     }
 
     private IEnumerator RecordAnimation(CharacterChoice characterChoice, RecordingSettings settings, 
-        Action SetCharacterAnimation, string animationName, int animationIndex)
+        Action SetCharacterAnimation, string animationName, int animationIndex, AnimationChoice.AnimationClipItem clip)
     {
         for (var i = 0; i < settings.characterList.items.Count; i++)
         {
@@ -77,9 +77,10 @@ public class VideoRecorder : MonoBehaviour
             yield return null;
             SetCharacterAnimation();
             yield return null;
-            yield return RecordCharacter(i, settings, animationName, animationIndex);
+            yield return RecordCharacter(i, settings, animationName, animationIndex, clip, 
+                SetCharacterAnimation);
 
-            if (i == 0)
+            if (i == 0 && settings.saveRigData)
             {
                 yield return RigMetadataCoroutine(settings, animationName);
             }
@@ -87,16 +88,17 @@ public class VideoRecorder : MonoBehaviour
     }
 
     private IEnumerator RecordCharacter(int characterIndex, RecordingSettings settings, string animationName,
-        int animationIndex)
+        int animationIndex, AnimationChoice.AnimationClipItem clip, Action SetCharacterAnimation)
     {
         foreach (var radius in settings.radiusList)
         {
-            yield return RecordRadius(radius, settings, characterIndex, animationName, animationIndex);
+            yield return RecordRadius(radius, settings, characterIndex, animationName, animationIndex, clip, 
+                SetCharacterAnimation);
         }
     }
 
     private IEnumerator RecordRadius(float radius, RecordingSettings settings, int characterIndex, string animationName,
-        int animationIndex)
+        int animationIndex, AnimationChoice.AnimationClipItem clip, Action SetCharacterAnimation)
     {
         _recordingCameras = new List<Camera>();
         _cameraGenerator = new BallhausCameraGenerator(cameraPrefab, cameraParent, focusObjectTransform, _recordingCameras);
@@ -105,7 +107,7 @@ public class VideoRecorder : MonoBehaviour
 
         if (!Directory.Exists(settings.recordingOutputFolder)) Directory.CreateDirectory(settings.recordingOutputFolder);
 
-        if (settings.maxBatchSize <= 0)
+        if (settings.maxBatchSize <= 0 || !clip.loopable)
         {
             settings.maxBatchSize = 1;
         }
@@ -119,16 +121,27 @@ public class VideoRecorder : MonoBehaviour
         int cameraIndex = 0;
         while (captureUnits.Any())
         {
-            var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
+            if (!clip.loopable)
+            {
+                var characterTransform = focusObjectTransform.GetChild(0).transform;
+                characterTransform.localPosition = Vector3.zero;
+                characterTransform.rotation = Quaternion.identity;
                 
+                SetCharacterAnimation();
+            }
+
+            var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
+            var clipLength = clip.loopable ? settings.clipLength : clip.clip.length;
+            
             foreach (var capture in currentBatch)
             {
                 var folder = $"{settings.recordingOutputFolder}/{animationName}";
                 var fileName = $"{animationName}_{animationIndex}-c{characterIndex}-r{radius}-{cameraIndex++}";
-                CaptureCamera(settings, capture, folder, fileName);
+                
+                CaptureCamera(settings, capture, folder, fileName, clipLength);
             }
             
-            yield return new WaitForSeconds(settings.clipLength);     
+            yield return new WaitForSeconds(clipLength);     
             captureUnits = captureUnits.Skip(settings.maxBatchSize).ToList();
         }
 
@@ -139,7 +152,8 @@ public class VideoRecorder : MonoBehaviour
         yield return null;
     }
 
-    private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string folder, string fileName)
+    private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string folder, string fileName,
+        float clipLength)
     {
         capture.IsRealTime = false;
         capture.FrameRate = settings.frameRate;
@@ -153,7 +167,7 @@ public class VideoRecorder : MonoBehaviour
 
         capture.StartCapture();
 
-        StartCoroutine(RecordingStopRoutine(capture, settings.clipLength));
+        StartCoroutine(RecordingStopRoutine(capture, clipLength));
 
         new CameraMetadataWriter($"{folder}/{settings.metaOutputFolder}/{fileName}.xml", capture.gameObject).Write();
     }
