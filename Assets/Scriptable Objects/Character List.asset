@@ -13,5 +13,23 @@ MonoBehaviour:
   m_Name: Character List
   m_EditorClassIdentifier: 
   items:
-  - name: caucasian_female
-    prefab: {fileID: 919132149155446097, guid: 92bc94b87083af440bb1b3ee2ca99e5a, type: 3}
+  - name: 01
+    prefab: {fileID: 919132149155446097, guid: 9e7e30beaaa104e4fa25a922d9ecd763, type: 3}
+  - name: 02
+    prefab: {fileID: 919132149155446097, guid: 6e775451e34616948855703151d89bef, type: 3}
+  - name: 03
+    prefab: {fileID: 919132149155446097, guid: 865a28c349872164f87917a98ffb6fb0, type: 3}
+  - name: 04
+    prefab: {fileID: 919132149155446097, guid: 4e6b437131f52e14bae3d64095f6eb09, type: 3}
+  - name: 05
+    prefab: {fileID: 919132149155446097, guid: 3e9fe92adb3814c43bc5929732940359, type: 3}
+  - name: 06
+    prefab: {fileID: 919132149155446097, guid: a01bf194708b55545aeef5abf2a6ccb5, type: 3}
+  - name: 07
+    prefab: {fileID: 919132149155446097, guid: 15ffde65de2ac7845882d7b05f631bfb, type: 3}
+  - name: 08
+    prefab: {fileID: 919132149155446097, guid: a37eab614739ed6418e2773520e58277, type: 3}
+  - name: 09
+    prefab: {fileID: 919132149155446097, guid: 366b6a42de509fe41b26151b32a10e66, type: 3}
+  - name: 10
+    prefab: {fileID: 919132149155446097, guid: 39369c93304df3249be5376e859811fe, type: 3}

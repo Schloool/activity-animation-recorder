@@ -121,13 +121,15 @@ public class AnimationChoice : MonoBehaviour
         var objectParent = RecursiveFindChild(character, action.boneName);
         var bindItem = Instantiate(action.prefab);
 
-        StartCoroutine(BindRoutine(bindItem, objectParent, clipLength * action.timePercentage));
+        StartCoroutine(BindRoutine(action, bindItem, objectParent, clipLength * action.timePercentage));
     }
 
-    private IEnumerator BindRoutine(GameObject bindItem, Transform objectParent, float time)
+    private IEnumerator BindRoutine(AnimationClipItem.AnimationBindAction action, GameObject bindItem, Transform objectParent, float time)
     {
         yield return new WaitForSeconds(time);
         bindItem.transform.parent = objectParent;
+        bindItem.transform.localPosition = action.offset;
+        bindItem.transform.localScale = action.prefab.transform.localScale;
     }
 
     private static Transform RecursiveFindChild(Transform parent, string childName)
@@ -164,6 +166,7 @@ public class AnimationChoice : MonoBehaviour
             public GameObject prefab;
             [Range(0f, 1f)] public float timePercentage;
             public string boneName;
+            public Vector3 offset;
         }
         
         [Serializable]
