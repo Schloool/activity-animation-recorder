@@ -15,33 +15,43 @@ MonoBehaviour:
   items:
   - name: person_sits_down
     clips:
-    - clip: {fileID: -4671056281497532287, guid: 4c89ed20d0e64bb478d2be01f5165bf6, type: 3}
+    - clip: {fileID: -4671056281497532287, guid: eab489e01171e28429778cefbf55a5cb, type: 3}
       loopable: 0
-      skipFirstFrame: 1
       movable: 0
       bindActions: []
       interactAction:
         interactablePrefab: {fileID: 6391229120522131596, guid: 0b578c3a17686de428632044d54e1576, type: 3}
-        spawnPosition: {x: 0, y: 0.65, z: -0.94}
+        spawnPosition: {x: -0.064, y: 0.656, z: -2.889}
         moveIntoObject: 0
+        turnToObject: 0
+        afterMainAnimationClip: {fileID: 0}
+    - clip: {fileID: -4671056281497532287, guid: 4c89ed20d0e64bb478d2be01f5165bf6, type: 3}
+      loopable: 0
+      movable: 0
+      bindActions: []
+      interactAction:
+        interactablePrefab: {fileID: 6391229120522131596, guid: 0b578c3a17686de428632044d54e1576, type: 3}
+        spawnPosition: {x: 0.062, y: 0.85, z: -1.956}
+        moveIntoObject: 0
+        turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
     - clip: {fileID: -4671056281497532287, guid: 5f69ed56be829ce46a009e45f74c9e64, type: 3}
       loopable: 0
-      skipFirstFrame: 1
       movable: 0
       bindActions: []
       interactAction:
         interactablePrefab: {fileID: 0}
         spawnPosition: {x: 0, y: 0, z: 0}
         moveIntoObject: 0
+        turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
     - clip: {fileID: -4671056281497532287, guid: 25b4a19dd18e34f4bb7b95af9935866c, type: 3}
       loopable: 0
-      skipFirstFrame: 1
       movable: 0
       bindActions: []
       interactAction:
         interactablePrefab: {fileID: 0}
         spawnPosition: {x: 0, y: 0, z: 0}
         moveIntoObject: 0
+        turnToObject: 0
         afterMainAnimationClip: {fileID: 0}

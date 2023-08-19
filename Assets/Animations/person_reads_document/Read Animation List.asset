@@ -24,7 +24,7 @@ MonoBehaviour:
         boneName: finger3-3.R
         offset: {x: -0.3, y: 0, z: 0}
       interactAction:
-        interactablePrefab: {fileID: 0}
+        interactablePrefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
         spawnPosition: {x: 0, y: 0, z: 0}
         moveIntoObject: 0
         turnToObject: 0

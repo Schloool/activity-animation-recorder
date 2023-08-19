@@ -55,16 +55,6 @@ MonoBehaviour:
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
-    - clip: {fileID: -4671056281497532287, guid: 4d8d71d95ec04134bbc663472997a05e, type: 3}
-      loopable: 0
-      movable: 0
-      bindActions: []
-      interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
-        moveIntoObject: 0
-        turnToObject: 0
-        afterMainAnimationClip: {fileID: 0}
     - clip: {fileID: -4671056281497532287, guid: 9175d6b39ac95734b8912724602df883, type: 3}
       loopable: 0
       movable: 0

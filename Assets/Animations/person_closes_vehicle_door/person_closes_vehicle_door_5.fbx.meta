@@ -45,7 +45,7 @@ ModelImporter:
       name: person_closes_vehicle_door_5
       takeName: clip
       internalID: -4671056281497532287
-      firstFrame: 0
+      firstFrame: 7
       lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0

@@ -13,32 +13,25 @@ MonoBehaviour:
   m_Name: Stand Up Animation List
   m_EditorClassIdentifier: 
   items:
-  - name: person_picks_up_object
+  - name: person_stands_up
     clips:
-    - clip: {fileID: -4671056281497532287, guid: 4c89ed20d0e64bb478d2be01f5165bf6, type: 3}
+    - clip: {fileID: -4671056281497532287, guid: d7bfde187b5dbc445a798c3903d6b8ed, type: 3}
       loopable: 0
-      skipFirstFrame: 1
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
+        interactablePrefab: {fileID: 6391229120522131596, guid: 0b578c3a17686de428632044d54e1576, type: 3}
+        spawnPosition: {x: 0.111, y: 0.795, z: -0.467}
         moveIntoObject: 0
+        turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
-    - clip: {fileID: -4671056281497532287, guid: 5f69ed56be829ce46a009e45f74c9e64, type: 3}
+    - clip: {fileID: -4671056281497532287, guid: 9cc64538029e8f44dbfbb9278457aea5, type: 3}
       loopable: 0
-      skipFirstFrame: 1
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
+        interactablePrefab: {fileID: 6391229120522131596, guid: 0b578c3a17686de428632044d54e1576, type: 3}
+        spawnPosition: {x: 0.111, y: 0.85, z: -0.467}
         moveIntoObject: 0
-        afterMainAnimationClip: {fileID: 0}
-    - clip: {fileID: -4671056281497532287, guid: 25b4a19dd18e34f4bb7b95af9935866c, type: 3}
-      loopable: 0
-      skipFirstFrame: 1
-      movable: 0
-      bindActions: []
-      interactAction:
-        interactablePrefab: {fileID: 0}
-        moveIntoObject: 0
+        turnToObject: 0
         afterMainAnimationClip: {fileID: 0}

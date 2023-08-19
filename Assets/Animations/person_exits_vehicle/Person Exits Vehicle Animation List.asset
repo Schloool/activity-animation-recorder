@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Person Exits Vehicle Animation List
   m_EditorClassIdentifier: 
   items:
-  - name: person_enters_vehicle
+  - name: person_exits_vehicle
     clips:
     - clip: {fileID: -4671056281497532287, guid: d412d743ffe47cc45ada373f88bf4542, type: 3}
       loopable: 0
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: f802f4e8cab8afa40ad4eb88f658a955, type: 3}
+        spawnPosition: {x: 0, y: 1.43, z: 0}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
@@ -30,8 +30,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: f802f4e8cab8afa40ad4eb88f658a955, type: 3}
+        spawnPosition: {x: 0, y: 1.43, z: 0}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
@@ -40,8 +40,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: f802f4e8cab8afa40ad4eb88f658a955, type: 3}
+        spawnPosition: {x: 0, y: 1.43, z: 0}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}

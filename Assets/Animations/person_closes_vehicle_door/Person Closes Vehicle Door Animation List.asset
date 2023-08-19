@@ -20,8 +20,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: 2e0166feb3082c447809f922447c5f9d, type: 3}
+        spawnPosition: {x: 0.596, y: 1.764, z: 1.538}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
@@ -30,8 +30,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: 2e0166feb3082c447809f922447c5f9d, type: 3}
+        spawnPosition: {x: 0.596, y: 1.764, z: 1.538}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
@@ -40,8 +40,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: 2e0166feb3082c447809f922447c5f9d, type: 3}
+        spawnPosition: {x: 0.596, y: 1.764, z: 1.538}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}
@@ -50,8 +50,8 @@ MonoBehaviour:
       movable: 0
       bindActions: []
       interactAction:
-        interactablePrefab: {fileID: 0}
-        spawnPosition: {x: 0, y: 0, z: 0}
+        interactablePrefab: {fileID: 1799485147154252005, guid: 2e0166feb3082c447809f922447c5f9d, type: 3}
+        spawnPosition: {x: 0.596, y: 1.764, z: 1.538}
         moveIntoObject: 0
         turnToObject: 0
         afterMainAnimationClip: {fileID: 0}

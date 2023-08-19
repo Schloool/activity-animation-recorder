@@ -42,10 +42,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: clip
+      name: person_closes_vehice_door_3
       takeName: clip
       internalID: -4671056281497532287
-      firstFrame: 0
+      firstFrame: 28
       lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0

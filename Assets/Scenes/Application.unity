@@ -5653,8 +5653,8 @@ MonoBehaviour:
     metaOutputFolder: meta
     radiusList:
     - 6
-    characterList: {fileID: 11400000, guid: 27f41c0b93fc6f647a6799accec1ebb0, type: 2}
-    animationList: {fileID: 11400000, guid: 651e22bc35e794844be0830cd97495ef, type: 2}
+    characterList: {fileID: 11400000, guid: ef6891a755a2ee0439b1c51b937f1d65, type: 2}
+    animationList: {fileID: 11400000, guid: bae0607ca55fd12478139ac4f842d45d, type: 2}
 --- !u!1 &1688064847
 GameObject:
   m_ObjectHideFlags: 0
