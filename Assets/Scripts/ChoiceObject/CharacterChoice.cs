@@ -63,5 +63,6 @@ public class CharacterChoice : MonoBehaviour
     public class CharacterItem : ChoiceObject
     {
         public GameObject prefab;
+        public string details;
     }
 }

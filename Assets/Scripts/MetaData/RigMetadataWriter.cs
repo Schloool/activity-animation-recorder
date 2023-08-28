@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Text.RegularExpressions;
+using System.Xml;
 using UnityEngine;
 
 public class RigMetadataWriter : MetadataWriter
@@ -20,7 +21,7 @@ public class RigMetadataWriter : MetadataWriter
         var position = boneParent.position;
         var rotation = boneParent.eulerAngles;
         
-        writer.WriteStartElement(boneParent.gameObject.name);
+        writer.WriteStartElement(Regex.Replace(boneParent.gameObject.name, @"[\s()]+", ""));
 
         writer.WriteStartElement("position");
         WriteSimpleElement("x", position.x.ToString(), writer);
@@ -33,14 +34,18 @@ public class RigMetadataWriter : MetadataWriter
         WriteSimpleElement("y", rotation.y.ToString(), writer);
         WriteSimpleElement("z", rotation.z.ToString(), writer);
         writer.WriteEndElement();
-        
-        writer.WriteEndElement();
 
-        if (boneParent.childCount <= 0) return;
+        if (boneParent.childCount <= 0)
+        {
+            writer.WriteEndElement();
+            return;
+        }
 
         foreach (Transform boneChild in boneParent)
         {
             WriteBoneRecursive(boneChild, writer);
         }
+        
+        writer.WriteEndElement();
     }
 }

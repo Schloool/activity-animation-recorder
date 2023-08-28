@@ -82,7 +82,7 @@ public class VideoRecorder : MonoBehaviour
 
             if (i == 0 && settings.saveRigData)
             {
-                yield return RigMetadataCoroutine(settings, animationName);
+                yield return RigMetadataCoroutine(settings, animationName, animationIndex);
             }
         }
     }
@@ -132,13 +132,14 @@ public class VideoRecorder : MonoBehaviour
 
             var currentBatch = captureUnits.Take(settings.maxBatchSize).ToList();
             var clipLength = clip.loopable ? settings.clipLength : clip.clip.length;
+            var character = settings.characterList.items[characterIndex];
             
             foreach (var capture in currentBatch)
             {
                 var folder = $"{settings.recordingOutputFolder}/{animationName}";
                 var fileName = $"{animationName}_{animationIndex}-c{characterIndex}-r{radius}-{cameraIndex++}";
                 
-                CaptureCamera(settings, capture, folder, fileName, clipLength);
+                CaptureCamera(settings, capture, folder, fileName, clipLength, character);
             }
             
             yield return new WaitForSeconds(clipLength);     
@@ -153,7 +154,7 @@ public class VideoRecorder : MonoBehaviour
     }
 
     private void CaptureCamera(RecordingSettings settings, CaptureFromCamera capture, string folder, string fileName,
-        float clipLength)
+        float clipLength, CharacterChoice.CharacterItem character)
     {
         capture.IsRealTime = false;
         capture.FrameRate = settings.frameRate;
@@ -169,7 +170,7 @@ public class VideoRecorder : MonoBehaviour
 
         StartCoroutine(RecordingStopRoutine(capture, clipLength));
 
-        new CameraMetadataWriter($"{folder}/{settings.metaOutputFolder}/{fileName}.xml", capture.gameObject).Write();
+        new CameraMetadataWriter($"{folder}/{settings.metaOutputFolder}/{fileName}.xml", capture.gameObject, character).Write();
     }
 
     private IEnumerator RecordingStopRoutine(CaptureBase capture, float delay)
@@ -178,13 +179,13 @@ public class VideoRecorder : MonoBehaviour
         capture.StopCapture();
     }
 
-    private IEnumerator RigMetadataCoroutine(RecordingSettings settings, string animationName)
+    private IEnumerator RigMetadataCoroutine(RecordingSettings settings, string animationName, int animationIndex)
     {
         var rigParent = focusObjectTransform.GetComponentsInChildren<Transform>()
             .FirstOrDefault(t => t.gameObject.name == "root");
         if (rigParent == null) yield break;
 
-        var rigFolder = $"{settings.recordingOutputFolder}/{animationName}/{settings.metaOutputFolder}/rig";
+        var rigFolder = $"{settings.recordingOutputFolder}/{animationName}/{settings.metaOutputFolder}/rig_{animationIndex}";
         Directory.CreateDirectory(rigFolder);
         
         int currentFrame = 0;

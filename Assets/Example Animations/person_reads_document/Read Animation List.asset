@@ -22,21 +22,7 @@ MonoBehaviour:
       - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
         timePercentage: 0
         boneName: finger3-3.R
-        offset: {x: -0.3, y: 0, z: 0}
-      interactAction:
-        interactablePrefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
-        spawnPosition: {x: 0, y: 0, z: 0}
-        moveIntoObject: 0
-        turnToObject: 0
-        afterMainAnimationClip: {fileID: 0}
-    - clip: {fileID: -4671056281497532287, guid: 31d5ae8432e45574995bd8390e74167f, type: 3}
-      loopable: 0
-      movable: 0
-      bindActions:
-      - prefab: {fileID: 1028615375780340856, guid: 5f257d7b6de0ee940ab1ea240d56253e, type: 3}
-        timePercentage: 0
-        boneName: finger3-3.R
-        offset: {x: -0.3, y: 0, z: 0}
+        offset: {x: 0, y: 0, z: 0}
       interactAction:
         interactablePrefab: {fileID: 0}
         spawnPosition: {x: 0, y: 0, z: 0}
@@ -91,7 +77,7 @@ MonoBehaviour:
       bindActions:
       - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
         timePercentage: 0
-        boneName: finger3-3.R
+        boneName: finger3-3.L
         offset: {x: 0, y: 0, z: 0}
       interactAction:
         interactablePrefab: {fileID: 0}
@@ -105,7 +91,7 @@ MonoBehaviour:
       bindActions:
       - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
         timePercentage: 0
-        boneName: finger3-3.R
+        boneName: finger3-3.L
         offset: {x: 0, y: 0, z: 0}
       interactAction:
         interactablePrefab: {fileID: 0}
@@ -119,7 +105,7 @@ MonoBehaviour:
       bindActions:
       - prefab: {fileID: 38083015461763009, guid: 20ddf81e6a3f5bc41b57d14a8644294c, type: 3}
         timePercentage: 0
-        boneName: finger3-3.R
+        boneName: finger3-3.L
         offset: {x: 0, y: 0, z: 0}
       interactAction:
         interactablePrefab: {fileID: 0}

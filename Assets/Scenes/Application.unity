@@ -361,7 +361,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1675499738}
         m_TargetAssemblyTypeName: RecordingUI, Assembly-CSharp
-        m_MethodName: RecordWithPreSettings
+        m_MethodName: RecordAllCameras
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85f864b5fd548538eaf70549394c76c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <AnimationList>k__BackingField: {fileID: 11400000, guid: fe9424b768a1e5643baa6a363c0c1a61, type: 2}
+  <AnimationList>k__BackingField: {fileID: 11400000, guid: d0ee92664cb63fb4dbbaafd43d2d8b7c, type: 2}
   characterParent: {fileID: 1949895438}
 --- !u!1 &626124002
 GameObject:
@@ -5648,13 +5648,13 @@ MonoBehaviour:
     clipLength: 2
     cameraAmount: 5
     maxBatchSize: 2
-    saveRigData: 0
+    saveRigData: 1
     recordingOutputFolder: Recordings
     metaOutputFolder: meta
     radiusList:
     - 6
     characterList: {fileID: 11400000, guid: ef6891a755a2ee0439b1c51b937f1d65, type: 2}
-    animationList: {fileID: 11400000, guid: bae0607ca55fd12478139ac4f842d45d, type: 2}
+    animationList: {fileID: 11400000, guid: bef7e5adb8eb24d44b1b257ab7241a04, type: 2}
 --- !u!1 &1688064847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5956,7 +5956,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
+          m_IntArgument: -5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7040,7 +7040,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

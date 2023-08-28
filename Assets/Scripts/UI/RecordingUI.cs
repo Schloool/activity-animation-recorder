@@ -59,8 +59,12 @@ public class RecordingUI : MonoBehaviour
             clipLength = clipLengthInSeconds,
             cameraAmount = cameraAmount,
             recordingOutputFolder = "Recordings",
-            metaOutputFolder = "Recordings/Meta",
-            radiusList = new List<float> { 6f }
+            metaOutputFolder = "meta",
+            radiusList = new List<float> { 6f },
+            animationList = FindObjectOfType<AnimationChoice>().AnimationList,
+            characterList = FindObjectOfType<CharacterChoice>().characterList,
+            saveRigData = true,
+            maxBatchSize = 2,
         }; 
         
         RecordWithSettings(settings);
