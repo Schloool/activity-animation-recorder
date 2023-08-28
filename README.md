@@ -40,7 +40,7 @@ By default, only two models and animations are included in the build. If you wan
 
 4. (optional): Configure asset settings manually using the generated Scriptable Objects under `Assets/Scriptable Objects`.
 
-![image](https://github.com/Schloool/activity-animation-recorder/assets/18749177/973d0c8e-ad85-42ba-ab94-859a0b853787)
+![image](https://github.com/Schloool/activity-animation-recorder/assets/18749177/0396fc12-2019-4e6e-807f-f473e9c063db)
 
 You can set up various details:
 - **Clip**: The animation the character will play.
